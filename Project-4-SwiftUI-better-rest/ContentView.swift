@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreML
 
 struct ContentView: View {
     
@@ -13,38 +14,53 @@ struct ContentView: View {
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
+    @State private var showAlertError = false
+    
+    
     var body: some View {
         NavigationStack {
             VStack {
-                Text("When do you want to wake up?")
-                    .font(.headline)
-                
-                DatePicker(
-                    "Please enter a time",
-                    selection: $wakeUp,
-                    displayedComponents: .hourAndMinute
-                )
-                .labelsHidden()
-                
-                Text("Desired amount of sleep")
-                    .font(.headline)
-                
-                Stepper(
-                    "\(sleepAmount.formatted()) hours",
-                    value: $sleepAmount,
-                    in: 4...12,
-                    step: 0.5
-                )
-                
-                Text("Daily coffee intake")
-                    .font(.headline)
-                
-                Stepper(
-                    "\(coffeeAmount) cup(s)",
-                    value: $coffeeAmount,
-                    in: 1...12,
-                    step: 1
-                )
+                Form {
+                    Section {
+                        Text("When do you want to wake up?")
+                            .font(.headline)
+                        
+                        HStack {
+                            Spacer()
+                            DatePicker(
+                                "Please enter a time",
+                                selection: $wakeUp,
+                                displayedComponents: .hourAndMinute
+                            )
+                            .labelsHidden()
+                            Spacer()
+                        }
+                    }
+                    
+                    Section {
+                        Text("Desired amount of sleep")
+                            .font(.headline)
+                        
+                        Stepper(
+                            "\(sleepAmount.formatted()) hours",
+                            value: $sleepAmount,
+                            in: 4...12,
+                            step: 0.5
+                        )
+                    }
+                    
+                    Section {
+                        Text("Daily coffee intake")
+                            .font(.headline)
+                        
+                        Stepper(
+                            "\(coffeeAmount) cup(s)",
+                            value: $coffeeAmount,
+                            in: 1...12,
+                            step: 1
+                        )
+                    }
+                }
             }
             
             .navigationTitle("BetterRest")
@@ -56,7 +72,14 @@ struct ContentView: View {
     }
     
     func calculateBedTime(){
-        
+        do {
+            
+            let config = MLModelConfiguration()
+            let model = try BetterRest(configuration: config)
+            
+        } catch {
+            
+        }
     }
     
 }
