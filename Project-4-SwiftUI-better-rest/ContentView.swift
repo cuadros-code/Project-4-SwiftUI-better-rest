@@ -4,20 +4,26 @@
 //
 //  Created by Kevin Cuadros on 6/10/24.
 //
-
 import SwiftUI
 import CoreML
 
 struct ContentView: View {
     
-    @State private var wakeUp = Date.now
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var showingAlert = false
-    
+
+    static var defaultWakeTime: Date {
+        var component = DateComponents()
+        component.hour = 7
+        component.minute = 0
+        
+        return Calendar.current.date(from: component) ?? .now
+    }
     
     var body: some View {
         NavigationStack {
@@ -56,7 +62,7 @@ struct ContentView: View {
                             .font(.headline)
                         
                         Stepper(
-                            "\(coffeeAmount) cup(s)",
+                            "^[\(coffeeAmount) cup](inflect: true)",
                             value: $coffeeAmount,
                             in: 0...12,
                             step: 1
@@ -76,9 +82,6 @@ struct ContentView: View {
                 Button("Calculate", action: calculateBedTime)
             }
             
-            .onAppear {
-                setTimeHour()
-            }
         }
     }
     
@@ -114,17 +117,6 @@ struct ContentView: View {
             alertMessage = "Sorry, there was a problem calculating your bedtime."
             showingAlert = true
         }
-    }
-    
-    func setTimeHour() {
-        var component = Calendar.current.dateComponents(
-            [.hour, .minute],
-            from: wakeUp
-        )
-        component.hour = 8
-        component.minute = 0
-        
-        wakeUp = Calendar.current.date(from: component) ?? .now
     }
     
 }
