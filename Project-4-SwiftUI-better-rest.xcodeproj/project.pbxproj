@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1BDB94382CB4B64D0052C168 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1BDB94372CB4B6440052C168 /* README.md */; };
+		1BDB943C2CB4B6980052C168 /* img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BDB943B2CB4B6980052C168 /* img.png */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1B3EBDB22CB2E42500E94D88 /* Project-4-SwiftUI-better-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project-4-SwiftUI-better-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BDB94372CB4B6440052C168 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1BDB943B2CB4B6980052C168 /* img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +39,8 @@
 		1B3EBDA92CB2E42500E94D88 = {
 			isa = PBXGroup;
 			children = (
+				1BDB943B2CB4B6980052C168 /* img.png */,
+				1BDB94372CB4B6440052C168 /* README.md */,
 				1B3EBDB42CB2E42500E94D88 /* Project-4-SwiftUI-better-rest */,
 				1B3EBDB32CB2E42500E94D88 /* Products */,
 			);
@@ -109,6 +118,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BDB94382CB4B64D0052C168 /* README.md in Resources */,
+				1BDB943C2CB4B6980052C168 /* img.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
