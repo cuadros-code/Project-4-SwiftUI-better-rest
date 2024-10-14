@@ -73,9 +73,9 @@ struct ContentView: View {
                                 Text("\(text)")
                             }
                         }
-                               .onChange(of: coffeeAmount){
-                                   calculateBedTime()
-                               }
+                        .onChange(of: coffeeAmount){
+                            calculateBedTime()
+                        }
                         
                     }
                     
@@ -93,6 +93,7 @@ struct ContentView: View {
                         Spacer()
                         Text(alertMessage)
                             .font(.system(size: 50))
+                            .fontWeight(.bold)
                         Spacer()
                     }
                 }
