@@ -41,6 +41,9 @@ struct ContentView: View {
                                 displayedComponents: .hourAndMinute
                             )
                             .labelsHidden()
+                            .onChange(of: wakeUp) {
+                                calculateBedTime()
+                            }
                             Spacer()
                         }
                     }
@@ -55,6 +58,9 @@ struct ContentView: View {
                             in: 4...12,
                             step: 0.5
                         )
+                        .onChange(of: sleepAmount) {
+                            calculateBedTime()
+                        }
                     }
                     
                     Section {
@@ -63,19 +69,35 @@ struct ContentView: View {
                         
                         Picker("^[\(coffeeAmount) cup](inflect: true)",
                                selection: $coffeeAmount) {
-                            ForEach(1..<10, id: \.self) { text in
+                            ForEach(1..<21, id: \.self) { text in
                                 Text("\(text)")
                             }
                         }
+                               .onChange(of: coffeeAmount){
+                                   calculateBedTime()
+                               }
                         
-//                        Stepper(
-//                            "^[\(coffeeAmount) cup](inflect: true)",
-//                            value: $coffeeAmount,
-//                            in: 0...12,
-//                            step: 1
-//                        )
+                    }
+                    
+                    
+                }
+                
+                Group {
+                    HStack {
+                        Spacer()
+                        Text(alertTitle)
+                            .font(.system(size: 20))
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Text(alertMessage)
+                            .font(.system(size: 50))
+                        Spacer()
                     }
                 }
+               
+                
                 .alert(alertTitle, isPresented: $showingAlert) {
                     Button("OK") { }
                 } message: {
@@ -86,9 +108,12 @@ struct ContentView: View {
             .navigationTitle("BetterRest")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                Button("Calculate", action: calculateBedTime)
+//                Button("Calculate", action: calculateBedTime)
             }
             
+            .onAppear(){
+                calculateBedTime()
+            }
         }
     }
     
@@ -117,7 +142,7 @@ struct ContentView: View {
             
             alertTitle = "Your ideal bedtime is…"
             alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
-            showingAlert = true
+//            showingAlert = true
             
         } catch {
             alertTitle = "Error"
@@ -146,7 +171,15 @@ struct ContentView: View {
 //            in: 4...12,
 //            step: 0.5
 //        )
-//        
+
+
+//                        Stepper(
+//                            "^[\(coffeeAmount) cup](inflect: true)",
+//                            value: $coffeeAmount,
+//                            in: 0...12,
+//                            step: 1
+//                        )
+//
 //        Text(Date.now, format: .dateTime.hour().day().month().year())
 //        
 //        Text(Date.now.formatted(date: .long, time: .shortened))
