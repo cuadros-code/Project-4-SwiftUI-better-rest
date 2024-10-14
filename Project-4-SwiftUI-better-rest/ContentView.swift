@@ -61,12 +61,19 @@ struct ContentView: View {
                         Text("Daily coffee intake")
                             .font(.headline)
                         
-                        Stepper(
-                            "^[\(coffeeAmount) cup](inflect: true)",
-                            value: $coffeeAmount,
-                            in: 0...12,
-                            step: 1
-                        )
+                        Picker("^[\(coffeeAmount) cup](inflect: true)",
+                               selection: $coffeeAmount) {
+                            ForEach(1..<10, id: \.self) { text in
+                                Text("\(text)")
+                            }
+                        }
+                        
+//                        Stepper(
+//                            "^[\(coffeeAmount) cup](inflect: true)",
+//                            value: $coffeeAmount,
+//                            in: 0...12,
+//                            step: 1
+//                        )
                     }
                 }
                 .alert(alertTitle, isPresented: $showingAlert) {
